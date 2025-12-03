@@ -38,19 +38,15 @@ This paper is structured as follows. First, the Methods section describes the da
 
 This study replicates the analytical framework of **Bradbury & Forman (2012)** and **Waldrop et al. (2025)** using pitch-level Statcast data from the **2024–2025 season**. The comprehensive dataset was merged across multiple files and sorted by pitcher and game date. All analyses were conducted in **Python (pandas, statsmodels)**, and the unit of observation was either a single pitch or a pitcher-game, depending on the model specification.
 
----
-
 ## Fatigue Variable Construction
 
 Pitch counts were not directly provided in the Statcast dataset, so game-level pitch counts were **reconstructed** by taking the maximum `pitch_number` for each pitcher–game combination. These values were used to compute the following pitcher-level fatigue variables:
 
-* **Previous-game workload:** `pitch_count_last_game`
-* **5-game rolling average workload:** `pitch_count_5g_avg`
-* **10-game rolling average workload:** `pitch_count_10g_avg`
+**Previous-game workload:** `pitch_count_last_game`
+**5-game rolling average workload:** `pitch_count_5g_avg`
+**10-game rolling average workload:** `pitch_count_10g_avg`
 
 Days of rest were derived directly from the built-in variable **`pitcher_days_since_prev_game`**.
-
----
 
 ## Outcome Variables
 
@@ -64,7 +60,6 @@ For the Poisson regression model, a pitcher-game–level outcome was created:
 
 * **Hard-hit events:** The count of pitches with **exit velocity $\ge 95$ mph**, aggregated per game.
 
----
 
 ## OLS Regression Models (Paper 1 Replication)
 
@@ -81,15 +76,13 @@ Each model included the same explanatory variables:
 
 **Note on Binary Outcomes:** Following the methodology of the original study (Bradbury & Forman, 2012), OLS was employed even for the binary outcomes (**Whiff** and **Home run event**) to ensure **direct and comparable replication**. As pitch-level outcomes are highly stochastic, low *R*-squared values were expected, and interpretation focused primarily on **coefficient direction** and **statistical significance** rather than predictive power.
 
----
-
 ## Poisson Regression Model (Paper 2 Replication)
 
 To mirror the approach of Waldrop et al. (2025), a **Poisson regression** was estimated at the pitcher-game level with **hard-hit count** as the dependent variable. The **total pitches per game** was included as a **log offset** to model the *rate* of hard-hit contact rather than the raw count.
 
 The predictors were:
 
-* **`rest_grp`** (A binary variable distinguishing between $\ge 5$ days versus $< 5$ days of rest.)
+* `rest_grp` (A binary variable distinguishing between $\ge 5$ days versus $< 5$ days of rest.)
 * `pitch_count_last_game`
 * `pitch_count_10g_avg`
 
