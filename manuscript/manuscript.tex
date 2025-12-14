@@ -34,64 +34,25 @@ To address this research gap, the present study utilizes Statcast based pitch le
 This paper is structured as follows. First, the Methods section describes the data collection process, variable construction, fatigue metric definitions, and the statistical models used for each outcome variable. The subsequent Results section presents regression outcomes for xwOBA, whiff rate, home run probability, and hard hit events, comparing the influence of fatigue metrics and rest days. The Discussion section interprets the main findings in relation to existing literature and offers practical implications for modern pitcher management strategies. Finally, the Conclusion section summarizes the findings of this research and proposes directions for future work.
 
 \section{Methods}
-This study replicates the analytical frameworks of Bradbury and Forman (2012) and Waldrop et al. (2025) using pitch-level Statcast data from the 2024--2025 MLB seasons. The comprehensive dataset was merged across multiple Statcast files and sorted by pitcher and game date. All analyses were conducted in Python using the \texttt{pandas} and \texttt{statsmodels} libraries. Depending on the model specification, the unit of observation was either an individual pitch or a pitcher--game.
+
+This study replicates the analytical frameworks of Bradbury and Forman (2012) and Waldrop et al. (2025) using pitch-level Statcast data from the 2024--2025 MLB seasons. The dataset was merged across multiple Statcast files and sorted by pitcher and game date. All analyses were conducted in Python using the \texttt{pandas} and \texttt{statsmodels} libraries. Depending on the model specification, the unit of observation was either an individual pitch or a pitcher--game.
 
 \subsection{Fatigue Variable Construction}
-Pitch counts were not directly provided in the Statcast dataset. Therefore, game-level pitch counts were reconstructed by taking the maximum \texttt{pitch\_number} for each pitcher--game combination. Using these reconstructed values, the following pitcher-level fatigue variables were constructed:
 
-\begin{itemize}
-    \item Previous-game workload: \texttt{pitch\_count\_last\_game}
-    \item Five-game rolling average workload: \texttt{pitch\_count\_5g\_avg}
-    \item Ten-game rolling average workload: \texttt{pitch\_count\_10g\_avg}
-\end{itemize}
-
-Days of rest were obtained directly from the Statcast variable \texttt{pitcher\_days\_since\_prev\_game}.
+Pitch counts are not directly reported in the Statcast dataset. Accordingly, game-level pitch counts were reconstructed by taking the maximum \texttt{pitch\_number} for each pitcher--game combination. These reconstructed values were then used to construct three pitcher-level workload measures: workload in the previous game (\texttt{pitch\_count\_last\_game}), the five-game rolling average workload (\texttt{pitch\_count\_5g\_avg}), and the ten-game rolling average workload (\texttt{pitch\_count\_10g\_avg}). Days of rest were obtained directly from the Statcast variable \texttt{pitcher\_days\_since\_prev\_game}.
 
 \subsection{Outcome Variables}
 
-Three pitch-level performance outcomes were modeled:
-
-\begin{enumerate}
-    \item \textbf{xwOBA}: Measured using \texttt{estimated\_woba\_using\_speedangle}.
-    \item \textbf{Whiff (swing-and-miss)}: A binary indicator equal to one if the pitch outcome was recorded as a swinging strike (\texttt{swinging\_strike}) or a swinging strike not in play (\texttt{swinging\_strike\_blocked}).
-    \item \textbf{Home run event}: A binary indicator equal to one if the pitch resulted in a home run, based on \texttt{events = home\_run}.
-\end{enumerate}
-
-For the count-based model, a pitcher--game–level outcome was constructed:
-
-\begin{itemize}
-    \item \textbf{Hard-hit events}: The number of pitches per game with exit velocity greater than or equal to 95 mph, aggregated at the pitcher--game level.
-\end{itemize}
+Three pitch-level performance outcomes were examined. The first outcome was expected weighted on-base average (xwOBA), measured using \texttt{estimated\_woba\_using\_speedangle}. The second outcome was a whiff indicator, defined as a binary variable equal to one if the pitch resulted in a swinging strike (\texttt{swinging\_strike}) or a swinging strike not in play (\texttt{swinging\_strike\_blocked}). The third outcome was a home run indicator, defined as a binary variable equal to one if the pitch resulted in a home run based on \texttt{events = home\_run}. For the count-based analysis, a pitcher--game–level outcome was constructed as the number of pitches per game with exit velocity greater than or equal to 95 mph, hereafter referred to as hard-hit events.
 
 \subsection{OLS Regression Models (Paper 1 Replication)}
 
-To directly replicate the empirical strategy of Bradbury and Forman (2012), Ordinary Least Squares (OLS) regressions were estimated for each pitch-level outcome: xwOBA, Whiff, and Home run events. Each model included the same set of explanatory variables:
-
-\begin{itemize}
-    \item \texttt{pitch\_count\_last\_game}
-    \item \texttt{pitch\_count\_5g\_avg}
-    \item \texttt{pitch\_count\_10g\_avg}
-    \item \texttt{days\_rest}
-    \item \texttt{arm\_angle}
-    \item \texttt{release\_speed}
-\end{itemize}
-
-\noindent
-\textbf{Note on Binary Outcomes.} Following the methodology of Bradbury and Forman (2012), OLS was employed for the binary outcomes (Whiff and Home run events) to ensure direct comparability with the original study. Given the highly stochastic nature of pitch-level outcomes, low $R^2$ values were expected, and interpretation focused primarily on coefficient direction and statistical significance rather than predictive performance.
+To replicate the empirical strategy of Bradbury and Forman (2012), Ordinary Least Squares (OLS) regressions were estimated for each pitch-level outcome: xwOBA, whiff events, and home run events. Each model included measures of recent and cumulative workload, days of rest, and pitch-level mechanical controls. Although two of the outcomes are binary, OLS was employed to ensure direct comparability with the original study. Given the inherently stochastic nature of pitch-level outcomes, low $R^2$ values were expected, and interpretation focused on coefficient direction and statistical significance rather than predictive performance.
 
 \subsection{Poisson Regression Model (Paper 2 Replication)}
 
-To mirror the approach of Waldrop et al. (2025), a Poisson regression model was estimated at the pitcher--game level with the count of hard-hit events as the dependent variable. The total number of pitches thrown per game was included as a log offset to model the rate of hard-hit contact per pitch rather than the raw count.
+To mirror the approach of Waldrop et al. (2025), a Poisson regression model was estimated at the pitcher--game level with the count of hard-hit events as the dependent variable. The total number of pitches thrown per game was included as a log offset to model the rate of hard-hit contact per pitch rather than the raw count. The model included a binary rest indicator distinguishing between pitchers with at least five days of rest and those with fewer than five days, along with measures of recent and longer-term workload. Incidence Rate Ratios (IRRs) were computed by exponentiating the estimated coefficients, allowing interpretation of how rest patterns and cumulative fatigue influence the rate of hard-hit contact.
 
-The model included the following predictors:
-
-\begin{itemize}
-    \item \texttt{rest\_grp}, a binary indicator distinguishing between pitchers with at least five days of rest and those with fewer than five days
-    \item \texttt{pitch\_count\_last\_game}
-    \item \texttt{pitch\_count\_10g\_avg}
-\end{itemize}
-
-Incidence Rate Ratios (IRRs) were computed by exponentiating the estimated coefficients ($IRR = e^{\beta}$), allowing interpretation of how rest patterns and longer-term fatigue influence the rate of hard-hit contact.
 
 
 \section{Results}
