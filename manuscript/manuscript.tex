@@ -80,7 +80,24 @@ Consistent with prior research, the overall explanatory power of the model was l
 Short-term workload, measured by pitch count in the previous game, exhibited a statistically significant negative association with xwOBA. In contrast, long-term cumulative workload, measured by the 10-game rolling average pitch count, showed a statistically significant positive association with xwOBA. Days of rest did not exhibit a statistically significant effect. Among mechanical controls, arm angle and release speed were both statistically significant predictors of xwOBA.
 
 \subsection{OLS Results: Whiff Rate}
-
+\begin{table}[htbp]
+\centering
+\label{tab:whiff}
+\begin{tabular}{lccc}
+\hline
+Variable & Coefficient & Std. Error & p-value \\
+\hline
+Intercept & 0.4628 & 0.005 & 0.000 \\
+Pitch count (last game) & 0.0010 & 0.000 & 0.000 \\
+Pitch count (5-game avg) & -0.0034 & 0.001 & 0.000 \\
+Pitch count (10-game avg) & -0.0044 & 0.001 & 0.000 \\
+Days of rest & -0.0004 & 0.000 & 0.000 \\
+Arm angle & 0.0003 & 0.000 & 0.000 \\
+Release speed & -0.0035 & 0.000 & 0.000 \\
+\hline
+\caption{OLS Regression Results for Whiff Events}
+\end{tabular}
+\end{table}
 Table~\ref{tab:whiff} reports the OLS regression results for whiff events. 
 As expected for a binary pitch-level outcome, the model yielded a low $R^2$ value ($R^2 = 0.004$). 
 
