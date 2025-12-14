@@ -59,7 +59,6 @@ To mirror the approach of Waldrop et al. (2025), a Poisson regression model was 
 \subsection{OLS Results: xwOBA}
 \begin{table}[htbp]
 \centering
-\label{tab:xwoba}
 \begin{tabular}{lccc}
 \hline
 Variable & Coefficient & Std. Error & p-value \\
@@ -71,8 +70,9 @@ Days of rest & 0.0001 & 0.0001 & 0.404 \\
 Arm angle & -0.0001 & 0.0000 & 0.020 \\
 Release speed & 0.0033 & 0.0001 & 0.000 \\
 \hline
-\caption{OLS Regression Results for xwOBA}
 \end{tabular}
+\caption{OLS Regression Results for xwOBA}
+\label{tab:xwoba}
 \end{table}
 Table~\ref{tab:xwoba} presents the OLS regression results for pitch-level xwOBA. 
 Consistent with prior research, the overall explanatory power of the model was low ($R^2 = 0.003$), reflecting the high variability inherent in pitch-level outcomes. 
@@ -82,7 +82,6 @@ Short-term workload, measured by pitch count in the previous game, exhibited a s
 \subsection{OLS Results: Whiff Rate}
 \begin{table}[htbp]
 \centering
-\label{tab:whiff}
 \begin{tabular}{lccc}
 \hline
 Variable & Coefficient & Std. Error & p-value \\
@@ -95,8 +94,9 @@ Days of rest & -0.0004 & 0.000 & 0.000 \\
 Arm angle & 0.0003 & 0.000 & 0.000 \\
 Release speed & -0.0035 & 0.000 & 0.000 \\
 \hline
-\caption{OLS Regression Results for Whiff Events}
 \end{tabular}
+\caption{OLS Regression Results for Whiff Events}
+\label{tab:whiff}
 \end{table}
 Table~\ref{tab:whiff} reports the OLS regression results for whiff events. 
 As expected for a binary pitch-level outcome, the model yielded a low $R^2$ value ($R^2 = 0.004$). 
@@ -106,7 +106,6 @@ The previous-game pitch count was positively and significantly associated with w
 \subsection{OLS Results: Home Run Events}
 \begin{table}[htbp]
 \centering
-\label{tab:homerun}
 \begin{tabular}{lccc}
 \hline
 Variable & Coefficient & Std. Error & p-value \\
@@ -119,8 +118,9 @@ Days of rest & -0.000007 & 0.00001 & 0.611 \\
 Arm angle & 0.00002 & 0.00001 & 0.000 \\
 Release speed & 0.000001 & 0.00001 & 0.956 \\
 \hline
-\caption{OLS Regression Results for Home Run Events}
 \end{tabular}
+\caption{OLS Regression Results for Home Run Events}
+\label{tab:homerun}
 \end{table}
 Table~\ref{tab:homerun} presents the OLS regression results for pitch-level home run events. 
 Given the rarity of home runs at the pitch level, the model exhibited negligible explanatory power ($R^2 \approx 0$). 
@@ -130,7 +130,6 @@ The previous-game pitch count did not have a statistically significant associati
 \subsection{Poisson Regression Results: Hard-Hit Events}
 \begin{table}[htbp]
 \centering
-\label{tab:hardhit}
 \begin{tabular}{lccc}
 \hline
 Variable & IRR & Std. Error & p-value \\
@@ -139,8 +138,9 @@ Rest group (≥ 5 days) & 2.031 & 0.009 & 0.000 \\
 Pitch count (last game) & 1.010 & 0.002 & 0.000 \\
 Pitch count (10-game avg) & 1.396 & 0.005 & 0.000 \\
 \hline
-\caption{Poisson Regression Results for Hard-Hit Events}
 \end{tabular}
+\caption{Poisson Regression Results for Hard-Hit Events}
+\label{tab:hardhit}
 \end{table}
 Table~\ref{tab:hardhit} reports the results of the Poisson regression model examining pitcher--game–level hard-hit events. The dependent variable was the count of hard-hit events per game, with the total number of pitches included as a log offset.
 
