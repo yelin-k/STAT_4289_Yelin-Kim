@@ -104,14 +104,44 @@ As expected for a binary pitch-level outcome, the model yielded a low $R^2$ valu
 The previous-game pitch count was positively and significantly associated with whiff probability. In contrast, both the 5-game and 10-game rolling average pitch counts exhibited statistically significant negative associations with whiff events. Days of rest again showed a small but statistically significant negative effect. Arm angle was positively associated with whiff probability, while release speed was negatively associated with whiff probability.
 
 \subsection{OLS Results: Home Run Events}
-
+\begin{table}[htbp]
+\centering
+\label{tab:homerun}
+\begin{tabular}{lccc}
+\hline
+Variable & Coefficient & Std. Error & p-value \\
+\hline
+Intercept & 0.0023 & 0.001 & 0.070 \\
+Pitch count (last game) & 0.00007 & 0.00006 & 0.223 \\
+Pitch count (5-game avg) & -0.0004 & 0.000 & 0.018 \\
+Pitch count (10-game avg) & 0.0009 & 0.000 & 0.000 \\
+Days of rest & -0.000007 & 0.00001 & 0.611 \\
+Arm angle & 0.00002 & 0.00001 & 0.000 \\
+Release speed & 0.000001 & 0.00001 & 0.956 \\
+\hline
+\caption{OLS Regression Results for Home Run Events}
+\end{tabular}
+\end{table}
 Table~\ref{tab:homerun} presents the OLS regression results for pitch-level home run events. 
 Given the rarity of home runs at the pitch level, the model exhibited negligible explanatory power ($R^2 \approx 0$). 
 
 The previous-game pitch count did not have a statistically significant association with home run probability. The 5-game rolling average pitch count was negatively associated with home run events, while the 10-game rolling average pitch count showed a statistically significant positive association. Days of rest did not exhibit a statistically significant effect. Arm angle was positively associated with home run probability, while release speed was not statistically significant.
 
 \subsection{Poisson Regression Results: Hard-Hit Events}
-
+\begin{table}[htbp]
+\centering
+\label{tab:hardhit}
+\begin{tabular}{lccc}
+\hline
+Variable & IRR & Std. Error & p-value \\
+\hline
+Rest group (≥ 5 days) & 2.031 & 0.009 & 0.000 \\
+Pitch count (last game) & 1.010 & 0.002 & 0.000 \\
+Pitch count (10-game avg) & 1.396 & 0.005 & 0.000 \\
+\hline
+\caption{Poisson Regression Results for Hard-Hit Events}
+\end{tabular}
+\end{table}
 Table~\ref{tab:hardhit} reports the results of the Poisson regression model examining pitcher--game–level hard-hit events. The dependent variable was the count of hard-hit events per game, with the total number of pitches included as a log offset.
 
 The rest-group indicator was strongly and positively associated with hard-hit event rates. Pitchers with five or more days of rest exhibited an incidence rate of hard-hit events approximately twice as high as those with fewer rest days (IRR = 2.03). 
