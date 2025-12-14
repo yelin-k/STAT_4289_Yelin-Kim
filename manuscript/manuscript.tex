@@ -57,7 +57,23 @@ To mirror the approach of Waldrop et al. (2025), a Poisson regression model was 
 
 \section{Results}
 \subsection{OLS Results: xwOBA}
-
+\begin{table}[htbp]
+\centering
+\caption{OLS Regression Results for xwOBA}
+\label{tab:xwoba}
+\begin{tabular}{lccc}
+\hline
+Variable & Coefficient & Std. Error & p-value \\
+\hline
+Pitch count (last game) & -0.0015 & 0.0005 & 0.003 \\
+Pitch count (5-game avg) & 0.0013 & 0.0015 & 0.371 \\
+Pitch count (10-game avg) & 0.0084 & 0.0015 & 0.000 \\
+Days of rest & 0.0001 & 0.0001 & 0.404 \\
+Arm angle & -0.0001 & 0.0000 & 0.020 \\
+Release speed & 0.0033 & 0.0001 & 0.000 \\
+\hline
+\end{tabular}
+\end{table}
 Table~\ref{tab:xwoba} presents the OLS regression results for pitch-level xwOBA. 
 Consistent with prior research, the overall explanatory power of the model was low ($R^2 = 0.003$), reflecting the high variability inherent in pitch-level outcomes. 
 
