@@ -12,19 +12,21 @@
 \usepackage{setspace}
 \usepackage[]{lineno}
 \linenumbers*[1]
-\doublespace
 
 \title{\bf Effects of Short-Term and Long-Term Fatigue on MLB Pitch Performance: A Pitch-Level Statcast Analysis}
 \author{Yelin Kim\\[1ex]
 Department of Statistics, University of Connecticut}
-\date{\today}
+% \date{\today}
 
 \begin{document}
+
 \maketitle
 
 \begin{abstract}
   Workload management is a critical operational strategy for managing pitcher performance and injury risk. Previous studies largely relied on game level data. However, with the emergence of high resolution pitch level data from Statcast, there is a need to re-evaluate the impact of fatigue. This study uses Statcast data from 2018 to 2023 to quantitatively analyze the effect of pitcher fatigue and rest days on four key pitch outcome metrics: Expected Weighted On Base Average (xwOBA), Whiff Rate, Home Run Probability, and Hard Hit Rate. Fatigue metrics are segmented into three time scales: pitches thrown in the last game (Short Term Fatigue), average pitches over the last 5 games (Medium Term Fatigue, Acute Workload Proxy), and average pitches over the last 10 games (Long Term Fatigue, Chronic Workload Proxy). Generalized Linear Models (GLM) appropriate for the data characteristics of each outcome variable will be applied to compare the time scale effects of fatigue and the efficacy of rest days. This research aims to demonstrate that long term cumulative workload holds stronger predictive power over modern pitching metrics compared to short term fatigue, suggesting that the management strategy based on the Acute Chronic Workload Ratio (ACWR) emphasized in sports science is also valid for baseball pitchers.
 \end{abstract}
+
+\doublespace
 
 \section{Introduction}
   Pitcher performance directly influences game outcomes and team standings, making pitch count management and rest day adjustments long standing, crucial operational strategies in Major League Baseball (MLB). Pitcher fatigue manifests in various forms, including decreased velocity, reduced command, and poorer batted ball quality. This is associated not only with short term performance decline but also with an increased risk of long term injuries. For these reasons, the influence of factors such as pitch count, cumulative workload, and rest days on pitcher performance has remained a critically important research topic in baseball analytics.
